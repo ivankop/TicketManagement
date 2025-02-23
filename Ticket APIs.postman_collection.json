@@ -1,0 +1,532 @@
+{
+	"info": {
+		"_postman_id": "32097301-d192-4f04-9f47-e821bd900408",
+		"name": "Ticket APIs",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "639007"
+	},
+	"item": [
+		{
+			"name": "Login as event manager",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"bob\",\r\n  \"password\": \"bob123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login as User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user\",\r\n  \"password\": \"user123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYiIsInJvbGUiOiJFdmVudCBNYW5hZ2VyIiwibmJmIjoxNzQwMzIyMDUyLCJleHAiOjE3NDAzMjU2NTIsImlhdCI6MTc0MDMyMjA1MiwiaXNzIjoidGlja2V0LWFwaSIsImF1ZCI6InRpY2tldC1jbGllbnQtYXBwIn0.GFjZ-eWt-JH-Zz4CS_sXqHr4mXw9SdbuBK-PD_BcmCw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"U2 concert 2\",\n  \"date\": \"2025-02-22T13:37:44.580Z\",\n  \"venue\": \"Las Vegas\",\n  \"description\": \"U2 spring concert in Las Vegas\",\n  \"eventTickets\": [\n    {\n      \"name\": \"GE\",\n      \"price\": 20,\n      \"capacity\": 100,\n      \"availableCapacity\": 100      \n    },\n    {\n      \"name\": \"VIP\",\n      \"price\": 100,\n      \"capacity\": 50,\n      \"availableCapacity\": 100      \n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/event",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"event"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYiIsInJvbGUiOiJFdmVudCBNYW5hZ2VyIiwibmJmIjoxNzQwMzQ4ODY2LCJleHAiOjE3NDAzNTI0NjYsImlhdCI6MTc0MDM0ODg2NiwiaXNzIjoidGlja2V0LWFwaSIsImF1ZCI6InRpY2tldC1jbGllbnQtYXBwIn0.cSIkTuokrmb_7DSwDgCAi06ddNWPiEDzCFi-S5QOgFk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"U2 concert 2\",\n  \"date\": \"2025-02-22T13:37:44.580Z\",\n  \"venue\": \"Las Vegas\",\n  \"description\": \"U2 spring concert in Las Vegas\",\n  \"eventTickets\": [\n    {\n      \"name\": \"GE\",\n      \"price\": 20,\n      \"capacity\": 100,\n      \"availableCapacity\": 100      \n    },\n    {\n      \"name\": \"VIP\",\n      \"price\": 100,\n      \"capacity\": 50,\n      \"availableCapacity\": 100      \n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/event/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"event",
+						"1"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYiIsInJvbGUiOiJFdmVudCBNYW5hZ2VyIiwibmJmIjoxNzQwMzQ3NzA5LCJleHAiOjE3NDAzNTEzMDksImlhdCI6MTc0MDM0NzcwOSwiaXNzIjoidGlja2V0LWFwaSIsImF1ZCI6InRpY2tldC1jbGllbnQtYXBwIn0.ZJ3rWRqQrHA6DjXdU3SZelfLw_Rx0Q1UfJVAnSdUsuc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"U2 concert 2\",\n  \"date\": \"2025-02-22T13:37:44.580Z\",\n  \"venue\": \"Las Vegas\",\n  \"description\": \"U2 spring concert in Las Vegas. NE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/event/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"event",
+						"2"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update event ticket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYiIsInJvbGUiOiJFdmVudCBNYW5hZ2VyIiwibmJmIjoxNzQwMzQ3NzA5LCJleHAiOjE3NDAzNTEzMDksImlhdCI6MTc0MDM0NzcwOSwiaXNzIjoidGlja2V0LWFwaSIsImF1ZCI6InRpY2tldC1jbGllbnQtYXBwIn0.ZJ3rWRqQrHA6DjXdU3SZelfLw_Rx0Q1UfJVAnSdUsuc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"name\": \"VIP\",\n      \"price\": 210,\n      \"capacity\": 60,\n      \"availableCapacity\": 100      \n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/event/4/eventticket",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"event",
+						"4",
+						"eventticket"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Create reservation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTc0MDM0OTI0NywiZXhwIjoxNzQwMzUyODQ3LCJpYXQiOjE3NDAzNDkyNDcsImlzcyI6InRpY2tldC1hcGkiLCJhdWQiOiJ0aWNrZXQtY2xpZW50LWFwcCJ9.x0T4zXUPBeaxaCaN6rMOakcYCmxiy18Imcfegd9qui0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"eventTicketId\": 1,\n  \"userId\": 2,\n  \"quantity\": 30\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/reservation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reservation"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Purchase reservation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTc0MDM0NTA4MywiZXhwIjoxNzQwMzQ4NjgzLCJpYXQiOjE3NDAzNDUwODMsImlzcyI6InRpY2tldC1hcGkiLCJhdWQiOiJ0aWNrZXQtY2xpZW50LWFwcCJ9.U3OwLekl_qEXtwH1viR_dmVxs_MQAitOYumHn8-vmdA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reservation/1/purchase",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reservation",
+						"1",
+						"purchase"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel reservation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTc0MDM0NjYzNSwiZXhwIjoxNzQwMzUwMjM1LCJpYXQiOjE3NDAzNDY2MzUsImlzcyI6InRpY2tldC1hcGkiLCJhdWQiOiJ0aWNrZXQtY2xpZW50LWFwcCJ9.Sq21IsnAIrQQ3x3CKqKrqfojUNnMaL6PzCNqHXfZRLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reservation/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reservation",
+						"3"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Availability",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTc0MDM0NTA4MywiZXhwIjoxNzQwMzQ4NjgzLCJpYXQiOjE3NDAzNDUwODMsImlzcyI6InRpY2tldC1hcGkiLCJhdWQiOiJ0aWNrZXQtY2xpZW50LWFwcCJ9.U3OwLekl_qEXtwH1viR_dmVxs_MQAitOYumHn8-vmdA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reservation/1/availability",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reservation",
+						"1",
+						"availability"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "History",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTc0MDM0NTA4MywiZXhwIjoxNzQwMzQ4NjgzLCJpYXQiOjE3NDAzNDUwODMsImlzcyI6InRpY2tldC1hcGkiLCJhdWQiOiJ0aWNrZXQtY2xpZW50LWFwcCJ9.U3OwLekl_qEXtwH1viR_dmVxs_MQAitOYumHn8-vmdA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reservation/2/history",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reservation",
+						"2",
+						"history"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://localhost:7208"
+		}
+	]
+}
