@@ -16,7 +16,7 @@ dotnet ef migrations add AddData --project TicketManagement.Data --startup-proje
 
 dotnet ef database update --project TicketManagement.Data --startup-project TicketManagement.Api
 ```
-- Import Postman collection Ticket `APIs.postman_collection.json` to Postman and start application.
+- Import Postman collection `Ticket APIs.postman_collection.json` to Postman and start application.
 - Login as event manager or user and copy the returned token
 - Use token to make calls to other APIs 
 
